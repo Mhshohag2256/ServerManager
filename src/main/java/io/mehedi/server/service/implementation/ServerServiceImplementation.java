@@ -1,21 +1,23 @@
-package io.getarrays.server.service.implementation;
+package io.mehedi.server.service.implementation;
 
-import io.getarrays.server.enumeration.Status;
-import io.getarrays.server.model.Server;
-import io.getarrays.server.repo.ServerRepo;
-import io.getarrays.server.service.ServerService;
+import io.mehedi.server.model.Server;
+import io.mehedi.server.repo.ServerRepo;
+import io.mehedi.server.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Collection;
+import java.util.Random;
 
-import static io.getarrays.server.enumeration.Status.SERVER_DOWN;
-import static io.getarrays.server.enumeration.Status.SERVER_UP;
+import static io.mehedi.server.enumeration.Status.SERVER_DOWN;
+import static io.mehedi.server.enumeration.Status.SERVER_UP;
+import static java.lang.Boolean.*;
+import static org.springframework.data.domain.PageRequest.of;
 
 @RequiredArgsConstructor
 @Service
@@ -44,25 +46,34 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Collection<Server> list(int limit) {
-        return null;
+        log.info("Fetching all servers: ");
+        return serverRepo.findAll(of(0,limit)).toList();
     }
+
 
     @Override
     public Server get(Long id) {
-        return null;
+        log.info("Fetching server by id: {}",id);
+        return serverRepo.findById(id).get();
     }
 
     @Override
     public Server update(Server server) {
-        return null;
+        log.info("Updating server: {}",server.getName());
+        return serverRepo.save(server);
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        log.info("Deleting server: {}",id);
+        serverRepo.deleteById(id);
+        return TRUE;
     }
 
     private String setServerImageUrl() {
-        return null;
+        String[] imageNames={"2.png","3.png","4.png","5.png"};
+        return ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("src/main/resources/img/"+imageNames[new Random().nextInt(4)])
+                .toUriString();
     }
 }

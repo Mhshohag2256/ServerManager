@@ -1,4 +1,4 @@
-package io.getarrays.server.enumeration;
+package io.mehedi.server.enumeration;
 
 public enum Status {
     SERVER_UP("SERVER_UP"),

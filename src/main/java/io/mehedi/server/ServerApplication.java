@@ -1,4 +1,4 @@
-package io.getarrays.server;
+package io.mehedi.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

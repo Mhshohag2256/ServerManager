@@ -1,6 +1,6 @@
-package io.getarrays.server.repo;
+package io.mehedi.server.repo;
 
-import io.getarrays.server.model.Server;
+import io.mehedi.server.model.Server;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServerRepo extends JpaRepository<Server,Long> {

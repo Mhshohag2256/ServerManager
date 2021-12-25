@@ -1,6 +1,6 @@
-package io.getarrays.server.model;
+package io.mehedi.server.model;
 
-import io.getarrays.server.enumeration.Status;
+import io.mehedi.server.enumeration.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
