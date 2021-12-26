@@ -28,7 +28,7 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Server create(Server server) {
-        log.info("Saving new server: {}",server.getName());
+        log.info("Saving new server: {}", server.getName());
         server.setImageUrl(setServerImageUrl());
         return serverRepo.save(server);
     }
@@ -36,10 +36,10 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Server ping(String ipAddress) throws IOException {
-        log.info("Pinging server IP: {}",ipAddress);
+        log.info("Pinging server IP: {}", ipAddress);
         Server server = serverRepo.findByIpAddress(ipAddress);
         InetAddress address = InetAddress.getByName(ipAddress);
-        server.setStatus(address.isReachable(10000)? SERVER_UP : SERVER_DOWN);
+        server.setStatus(address.isReachable(10000) ? SERVER_UP : SERVER_DOWN);
         serverRepo.save(server);
         return server;
     }
@@ -47,33 +47,33 @@ public class ServerServiceImplementation implements ServerService {
     @Override
     public Collection<Server> list(int limit) {
         log.info("Fetching all servers: ");
-        return serverRepo.findAll(of(0,limit)).toList();
+        return serverRepo.findAll(of(0, limit)).toList();
     }
 
 
     @Override
     public Server get(Long id) {
-        log.info("Fetching server by id: {}",id);
+        log.info("Fetching server by id: {}", id);
         return serverRepo.findById(id).get();
     }
 
     @Override
     public Server update(Server server) {
-        log.info("Updating server: {}",server.getName());
+        log.info("Updating server: {}", server.getName());
         return serverRepo.save(server);
     }
 
     @Override
     public Boolean delete(Long id) {
-        log.info("Deleting server: {}",id);
+        log.info("Deleting server: {}", id);
         serverRepo.deleteById(id);
         return TRUE;
     }
 
     private String setServerImageUrl() {
-        String[] imageNames={"2.png","3.png","4.png","5.png"};
+        String[] imageNames = {"2.png", "3.png", "4.png", "5.png"};
         return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("src/main/resources/img/"+imageNames[new Random().nextInt(4)])
+                .path("src/main/resources/img/" + imageNames[new Random().nextInt(4)])
                 .toUriString();
     }
 }
